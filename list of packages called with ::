@@ -1,0 +1,24 @@
+# script to develop a list of packages who's functions were called using the :: operator in .R scripts of a package. Does not count, lists packages once.
+library(stringr)
+
+list_unique_package_references <- function(path) {
+  files <- list.files(path, pattern = "\\.R$", full.names = TRUE, recursive = TRUE)
+  
+  package_names <- c()
+  
+  for (file in files) {
+    lines <- readLines(file)
+    
+    library_calls <- str_extract_all(lines, "library\\((.*?)\\)|require\\((.*?)\\)|[a-zA-Z0-9.]+::")
+    library_calls <- unlist(library_calls)
+    library_calls <- gsub("library\\(|require\\(|::|\\)", "", library_calls)
+    
+    package_names <- c(package_names, library_calls)
+  }
+  
+  package_names <- unique(package_names)
+  
+  return(package_names)
+}
+
+list_unique_package_references("~/your/path/here")
