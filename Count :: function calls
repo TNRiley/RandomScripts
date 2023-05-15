@@ -1,0 +1,25 @@
+#Script to list and count the number of times a package is called using the :: opperator within .R scripts in a package.
+
+library(stringr)
+
+count_package_references <- function(path) {
+  files <- list.files(path, pattern = "\\.R$", full.names = TRUE, recursive = TRUE)
+  
+  results <- list()
+  
+  for (file in files) {
+    lines <- readLines(file)
+    
+    library_calls <- str_extract_all(lines, "library\\((.*?)\\)|require\\((.*?)\\)|[a-zA-Z0-9.]+::")
+    library_calls <- unlist(library_calls)
+    library_calls <- gsub("library\\(|require\\(|::|\\)", "", library_calls)
+    
+    package_counts <- table(library_calls)
+    
+    results[[file]] <- package_counts
+  }
+  
+  return(results)
+}
+
+count_package_references("/path/to/your/project")
