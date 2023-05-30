@@ -1,0 +1,53 @@
+# Litte script to count the number of times each .ris file has a value across metadata fields
+# followed by a combined count across all files
+
+refWoS <- CiteSource::read_citations("../vignettes/TEST_RIS/WoS.ris")
+refDIM <- CiteSource::read_citations("../vignettes/TEST_RIS/DIM.ris")
+refPQ <- CiteSource::read_citations("../vignettes/TEST_RIS/PQ.ris")
+refLENS <- CiteSource::read_citations("../vignettes/TEST_RIS/LENS.ris")
+refScopus <- CiteSource::read_citations("../vignettes/TEST_RIS/Scopus.ris")
+refGS <- CiteSource::read_citations("../vignettes/TEST_RIS/Gscholar.ris")
+refIn <- CiteSource::read_citations("../vignettes/TEST_RIS/Inciteful.ris")
+
+refWoS_counts <- refWoS %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+refDIM_counts <- refDIM %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+refPQ_counts <- refPQ %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+refLENS_counts <- refLENS %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+refScopus_counts <- refScopus %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+refGS_counts <- refGS %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+refIn_counts <- refIn %>% 
+  purrr::map_int(~sum(!is.na(.))) %>%
+  enframe(name = "Column", value = "Count") %>% 
+  pivot_wider(names_from = Column, values_from = Count)
+
+combined_counts <- dplyr::bind_rows(refWoS_counts %>% mutate(DataSource = "refWoS"),
+                                    refDIM_counts %>% mutate(DataSource = "refDIM"),
+                                    refPQ_counts %>% mutate(DataSource = "refPQ"),
+                                    refLENS_counts %>% mutate(DataSource = "refLENS"),
+                                    refScopus_counts %>% mutate(DataSource = "refScopus"),
+                                    refGS_counts %>% mutate(DataSource = "refGS"),
+                                    refIn_counts %>% mutate(DataSource = "refIn"))
