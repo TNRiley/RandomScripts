@@ -1,0 +1,76 @@
+# Install and load necessary packages
+install.packages(c("devtools", "dplyr", "tibble", "codetools", "DT"))
+library(devtools)
+library(dplyr)
+library(tibble)
+library(codetools)
+library(DT)
+
+# Load your package
+load_all("path/to/CiteSource")
+
+# List all functions in your package
+pkg_functions <- ls(getNamespace("CiteSource"), all.names = TRUE)
+
+# Filter only functions
+pkg_functions <- pkg_functions[sapply(pkg_functions, function(x) is.function(get(x, envir = asNamespace("CiteSource"))))]
+
+# Function to get arguments of a function
+get_function_args <- function(func_name) {
+  func <- get(func_name, envir = asNamespace("CiteSource"))
+  if (is.function(func)) {
+    return(paste(names(formals(func)), collapse = ", "))
+  } else {
+    return(NULL)
+  }
+}
+
+# Function to get the file path of a function
+get_function_path <- function(func_name) {
+  func <- get(func_name, envir = asNamespace("CiteSource"))
+  if (is.function(func)) {
+    srcref <- attr(func, "srcref")
+    if (!is.null(srcref) && length(srcref) > 0) {
+      srcfile <- attr(srcref, "srcfile")
+      if (!is.null(srcfile)) {
+        full_path <- srcfile$filename
+        # Extract only the folder and file part
+        relative_path <- sub(".*/(R/.*)", "\\1", full_path)
+        return(relative_path)
+      }
+    }
+  }
+  return(NA)
+}
+
+# Create a data frame with function names, arguments, and file paths
+func_data <- tibble(
+  Folder = sapply(pkg_functions, get_function_path),
+  Function = pkg_functions,
+  Arguments = sapply(pkg_functions, get_function_args)
+)
+
+# Sort the data frame by Folder
+func_data <- func_data %>% arrange(Folder)
+
+# Function to convert data frame to Markdown
+df_to_markdown <- function(df) {
+  # Get the header
+  header <- paste(names(df), collapse = " | ")
+  # Get the separator
+  separator <- paste(rep("---", ncol(df)), collapse = " | ")
+  # Get the data
+  data <- apply(df, 1, function(row) paste(row, collapse = " | "))
+  # Combine all parts
+  markdown <- c(header, separator, data)
+  return(markdown)
+}
+
+# Convert the data frame to Markdown format
+markdown_table <- df_to_markdown(func_data)
+
+# Print the Markdown table
+cat(paste(markdown_table, collapse = "\n"))
+
+# Create a datatable and display it in the viewer
+datatable(func_data)
