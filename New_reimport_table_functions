@@ -4,6 +4,7 @@ library(tidyr)
 library(gt)
 
 #THIS IS A NEW WAY TO PROCESS A CSV IN ORDER TO USE unique_citations ONLY, unique_citations HAS ALL THE SAME DATA AS EXPORTED CSV SO WILL WORK ON BOTH
+#REPLACEMENT FOR current record_counts function
 # Define the process_citations function
 process_citations <- function(unique_citations, labels_to_include = NULL) {
   
