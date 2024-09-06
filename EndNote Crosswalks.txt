@@ -1,0 +1,60 @@
+ 
+ 
+## This is an outline of an EndNote .ris export for "journal article" type items. The record was created in EndNotex9.3.3 (EN)
+## Prior to export, each metadata field was filled in with the name of that field
+## Using sythesisr::read_refs the EndNote .ris file was read and the result is a crosswalk between EN and the sythesisr data frame
+ 
+## Next steps would be to read in various EN record types and examine if there are any changes between the crosswalk
+ 
+## Further crosswalks could be developed by reading corresponding item types with different reference management software (Zotero/Mendeley)
+ 
+## Functions could be developed to rename columns depending on the software, according to common crosswalk elements where metadata fields match.
+## By creating a crosswalk between reference management software there would not be a need for CiteSource to build in crosswalks for multiple databases
+## instead, users could first upload .ris to their preferred reference software before uploading it into CiteSource
+ 
+## CiteSource could then more accurately join and select preferred medatada
+ 
+ $ author            : chr "Author, A. A. A."
+ $ year              : chr "Year"
+ $ title             : chr "Title"
+ $ source            : chr "Journal"
+ $ start_page        : chr "Pages"
+ $ abstract          : chr "Abstract"
+ $ doi               : chr "DOI"
+ $ accession_zr      : chr "Accession Number"
+ $ url               : chr "URL"
+ $ conference_date   : chr "Access Date"
+ $ supertaxa         : chr "Short Title"
+ $ ID                : chr "6248"
+ $ ZZ                : chr NA
+ $ database          : chr "Name of Database"
+ $ date_generated    : chr "Date"
+ $ source_type       : chr "JOUR"
+ $ language          : chr "Language"
+ $ address           : chr "Author Address"
+ $ date_published    : chr "Database Provider"
+ $ journal           : chr "Tertiary Title"
+ $ source_abbreviated: chr "Alternate Title"
+ $ volume            : chr "Volume"
+ $ issue             : chr "Issue"
+ $ article_number    : chr "Custom 7"
+ $ keywords          : chr "Keyworkds"
+ $ issn              : chr "ISBN/ISSN"
+ $ call_number       : chr "Call Number"
+ $ pubmed_id         : chr "Custom 2"
+ $ registry_number   : chr "Research Notes"
+ $ chemicals         : chr "Notes"
+ $ notes             : chr "Notes"
+ $ C1                : chr "Custom 1"
+ $ C6                : chr "Custom 6"
+ $ CA                : chr "Cation"
+ $ ET                : chr "Edition"
+ $ LB                : chr "Label"
+ $ M3                : chr "Typel of Work"
+ $ NV                : chr "Part/Supplement"
+ $ OP                : chr "Original Publication"
+ $ RI                : chr "Reviewed Item"
+ $ RP                : chr "Reprint Edition"
+ $ SE                : chr "Section"
+ $ TA                : chr "Author, Translated"
+ $ TT                : chr "Translated Title"

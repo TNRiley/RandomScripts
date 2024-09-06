@@ -1,0 +1,28 @@
+ 
+## See notes on EndNote crosswalks
+
+## This Zotero export is based on the Journal Article reference type. Unlike EndNote there is no Generic type.
+ 
+ $ database          : chr "Archive"
+ $ date_generated    : chr "Date"
+ $ source_type       : chr "JOUR"
+ $ language          : chr "Language"
+ $ author            : chr "Author, A.A."
+ $ year              : chr "Year"
+ $ date_published    : chr "Library Catalog"
+ $ title             : chr "Title"
+ $ journal           : chr "Series"
+ $ source            : chr "Publication"
+ $ source_abbreviated: chr "Journal Abbr"
+ $ volume            : chr "Volume"
+ $ issue             : chr "Issue"
+ $ start_page        : chr "Pages"
+ $ abstract          : chr "Abstract"
+ $ keywords          : chr "Tags"
+ $ doi               : chr "DOI"
+ $ issn              : chr "ISSN"
+ $ call_number       : chr "Call Number"
+ $ accession_zr      : chr "Loc. in Archive"
+ $ url               : chr "URL"
+ $ conference_date   : chr "2022/01/01/"
+ $ supertaxa         : chr "Short Title"
